@@ -251,8 +251,6 @@ void add_tree_node(tree_s* tree) {
 
 
 tree_s create_tree(data_type* source, const size_t size) {
-	assert(source);
-
 	tree_s tree;
 	tree.root = NULL;
 	tree.size = size;
@@ -260,6 +258,7 @@ tree_s create_tree(data_type* source, const size_t size) {
 	if (size == 0) {
 		return tree;
 	}
+	assert(source);
 
 	qsort(source, size, sizeof(data_type), compare);
 
@@ -300,6 +299,7 @@ void delete_tree(tree_s* tree) {
 
 void print_tree(const tree_s tree) {
 	if (!tree.root) {
+		printf("Tree is empty");
 		return;
 	}
 	print_node(tree.root, 0);

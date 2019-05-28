@@ -5,12 +5,14 @@
 
 
 int main() {
-	// data_type source_values[] = {1};
+	// data_type source_values[] = {};
 	// data_type source_values[] = {1, 3};
-	data_type source_values[] = {1, 4, 3, 2, 5};
+	// data_type source_values[] = {1, 4, 3, 2, 5};
 	// data_type source_values[] = {1, 4, 3, 2, 5, 6, 7, 8};
 	// data_type source_values[] = {1, 4, 3, 2, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
-	tree_s tree = create_tree(source_values, sizeof(source_values) / sizeof(data_type));
+	
+	// tree_s tree = create_tree(source_values, sizeof(source_values) / sizeof(data_type));
+	tree_s tree = create_tree(NULL, 0);
 
 	int exit = 0;
 	while (!exit) {
