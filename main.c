@@ -12,7 +12,7 @@ int main() {
 	// data_type source_values[] = {1, 4, 3, 2, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
 	tree_s tree = create_tree(source_values, sizeof(source_values) / sizeof(data_type));
 
-	bool exit = false;
+	int exit = 0;
 	while (!exit) {
 		printf("Enter e to exit\n");
 		printf("Enter p to print tree\n");
@@ -33,7 +33,7 @@ int main() {
 				break;
 			}
 			case 'e': {
-				exit = true;
+				exit = 1;
 				break;
 			}
 			case 'p': {

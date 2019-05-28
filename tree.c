@@ -18,14 +18,6 @@
 
 #endif
 
-
-struct node_s {
-	data_type value;
-	node_s* left;
-	node_s* right;
-};
-
-
 int compare(const void* const a, const void* const b) {
 	return *(data_type*)a - *(data_type*)b;
 }
@@ -48,7 +40,7 @@ node_s* create_node(const data_type value) {
 }
 
 
-node_s* create_tree_nodes(const data_type* const source, const size_t size) {
+node_s* create_tree_nodes(const data_type* source, const size_t size) {
 	if (size == 0) {
 		return NULL;
 	}
@@ -56,14 +48,14 @@ node_s* create_tree_nodes(const data_type* const source, const size_t size) {
 	const size_t middle_index = size / 2;
 	const data_type mean_value = source[middle_index];
 
-	node_s* const root_node = create_node(mean_value);
+	node_s* root_node = create_node(mean_value);
 	root_node->left = create_tree_nodes(source, middle_index);
 	root_node->right = create_tree_nodes(source + middle_index + 1, size - middle_index - 1);
 	return root_node;
 }
 
 
-void delete_tree_node(node_s* const node) {
+void delete_tree_node(node_s* node) {
 	assert(node);
 	if (node->left) {
 		delete_tree_node(node->left);
@@ -79,7 +71,7 @@ void delete_tree_node(node_s* const node) {
 }
 
 
-void print_node(const node_s* const node, const size_t level) {
+void print_node(const node_s* node, const size_t level) {
 	if (node->right) {
 		print_node(node->right, level + 1);
 	}
@@ -108,7 +100,7 @@ void write_node_values_recursive(const node_s* const node, data_type* const dest
 }
 
 
-void delete_node_from_tree(tree_s* const tree) {
+void delete_node_from_tree(tree_s* tree) {
 	if (tree->size == 0) {
 		printf("Unable to delete element from tree: tree is already empty\n");
 		return;
@@ -126,7 +118,7 @@ void delete_node_from_tree(tree_s* const tree) {
 
 	data_type value_to_delete;
 
-	while (true) {
+	while (1) {
 		printf("You can delete one of this values from tree:\n");
 		for (size_t i = 0; i < tree->size; ++i) {
 			printf("%d ", previous_values[i]);
@@ -149,7 +141,7 @@ void delete_node_from_tree(tree_s* const tree) {
 		}
 		value_to_delete = (data_type)read_value;
 
-		bool found = false;
+		int found = 0;
 		for (size_t i = 0; i < tree->size; ++i) {
 			found |= previous_values[i] == value_to_delete;
 		}
@@ -196,7 +188,7 @@ void delete_node_from_tree(tree_s* const tree) {
 }
 
 
-void add_tree_node(tree_s* const tree) {
+void add_tree_node(tree_s* tree) {
 	const size_t previous_size = tree->size;
 	const size_t new_size = previous_size + 1;
 	data_type* values = (data_type*)malloc(sizeof(data_type) * (new_size));
@@ -211,7 +203,7 @@ void add_tree_node(tree_s* const tree) {
 
 	data_type new_value;
 
-	while (true) {
+	while (1) {
 		printf("Enter value to add in range 0-255: \n");
 
 		assert(sizeof(char) == sizeof(data_type)); // checks below are valid only if data_type is char
@@ -229,7 +221,7 @@ void add_tree_node(tree_s* const tree) {
 		}
 		new_value = (data_type)read_value;
 
-		bool already_added = false;
+		int already_added = 0;
 		for (size_t i = 0; i < previous_size; ++i) {
 			already_added |= values[i] == new_value;
 		}
@@ -258,7 +250,7 @@ void add_tree_node(tree_s* const tree) {
 }
 
 
-tree_s create_tree(data_type* const source, const size_t size) {
+tree_s create_tree(data_type* source, const size_t size) {
 	assert(source);
 
 	tree_s tree;
@@ -276,7 +268,7 @@ tree_s create_tree(data_type* const source, const size_t size) {
 }
 
 
-size_t get_node_rank_recursive(const node_s* const node) {
+size_t get_node_rank_recursive(const node_s* node) {
 	if (!node) {
 		return 0;
 	}
@@ -297,7 +289,7 @@ size_t get_tree_rank(const tree_s tree) {
 }
 
 
-void delete_tree(tree_s* const tree) {
+void delete_tree(tree_s* tree) {
 	if (!tree->root) {
 		return;
 	}
